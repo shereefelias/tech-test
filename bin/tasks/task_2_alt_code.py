@@ -1,13 +1,10 @@
 import numpy as np
-from typing import Tuple, List
 
-def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguous_integers: int) -> int:
+def find_greatest_product_of_contiguous_integers(grid: list[list[int]], contiguous_integers: int) -> int:
     g = np.array(grid, dtype=int)
     n, m = g.shape
     k = contiguous_integers
     max_product = 0 # default always to zero
-    best_pos = None
-    pivot_value = None
 
     #  Calculate possible combinations in each direction
     horizontal_combos = n * (m - k + 1)
@@ -23,8 +20,6 @@ def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguo
         value = int(prod[row_idx])
         if value > max_product:
             max_product = value
-            best_pos = (row_idx, j, 'right')
-            pivot_value = int(g[row_idx, j])
 
     #  Vertical  down
     for i in range(n - k + 1):
@@ -33,8 +28,6 @@ def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguo
         value = int(prod[col_idx])
         if value > max_product:
             max_product = value
-            best_pos = (i, col_idx, 'down')
-            pivot_value = int(g[i, col_idx])
 
     # Diagonal right
     for i in range(n - k + 1):
@@ -42,8 +35,6 @@ def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguo
             value = int(np.prod([g[i + d, j + d] for d in range(k)]))
             if value > max_product:
                 max_product = value
-                best_pos = (i, j, 'diag_dr')
-                pivot_value = int(g[i, j])
 
     # Diagonal left
     for i in range(n - k + 1):
@@ -51,8 +42,6 @@ def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguo
             value = int(np.prod([g[i + d, j - d] for d in range(k)]))
             if value > max_product:
                 max_product = value
-                best_pos = (i, j, 'diag_dl')
-                pivot_value = int(g[i, j])
 
     # print summary
     print(f"Grid size: {n}x{m}, Contiguous = {k}")

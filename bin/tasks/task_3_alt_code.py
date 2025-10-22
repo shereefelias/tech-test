@@ -1,11 +1,8 @@
-from typing import List, Tuple
 
 
-def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguous_integers: int = 3) -> int:
+def find_greatest_product_of_contiguous_integers(grid: list[list[int]], contiguous_integers: int = 3) -> int:
     rows, cols = len(grid), len(grid[0])
     max_product = 0
-    max_direction = None
-    pivot_value = None
 
     directions = {
         'right': (0, 1),
@@ -32,8 +29,6 @@ def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguo
                     prod *= grid[x][y]
                 if prod > max_product:
                     max_product = prod
-                    max_direction = name
-                    pivot_value = grid[i][j]
 
     horizontal = rows * (cols - k + 1) if cols >= k else 0
     vertical = (rows - k + 1) * cols if rows >= k else 0

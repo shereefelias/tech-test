@@ -1,10 +1,7 @@
-from typing import List
 
-def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguous_integers: int) -> int:
+def find_greatest_product_of_contiguous_integers(grid: list[list[int]], contiguous_integers: int) -> int:
     rows, cols = len(grid), len(grid[0])
     max_product = 0 # default always to zero
-    max_direction = None
-    pivot_value = None
 
     # Calculate possible combinations in each direction
     horizontal_combos = rows * (cols - contiguous_integers + 1)
@@ -22,8 +19,6 @@ def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguo
                     product *= grid[i][j + k]
                 if product > max_product:
                     max_product = product
-                    max_direction = "right"
-                    pivot_value = grid[i][j]
 
             # Vertical down
             if i + contiguous_integers <= rows:
@@ -32,8 +27,6 @@ def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguo
                     product *= grid[i + k][j]
                 if product > max_product:
                     max_product = product
-                    max_direction = "down"
-                    pivot_value = grid[i][j]
 
             # Diagonal right
             if i + contiguous_integers <= rows and j + contiguous_integers <= cols:
@@ -42,8 +35,6 @@ def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguo
                     product *= grid[i + k][j + k]
                 if product > max_product:
                     max_product = product
-                    max_direction = "diagonal down-right"
-                    pivot_value = grid[i][j]
 
             # Diagonal left
             if i + contiguous_integers <= rows and j - contiguous_integers >= -1:
@@ -52,8 +43,6 @@ def find_greatest_product_of_contiguous_integers(grid: List[List[int]], contiguo
                     product *= grid[i + k][j - k]
                 if product > max_product:
                     max_product = product
-                    max_direction = "diagonal down-left"
-                    pivot_value = grid[i][j]
 
     # print summary
     print(f"Grid size: {rows}x{cols}, Contiguous = {contiguous_integers}")

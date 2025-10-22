@@ -1,9 +1,8 @@
-import time
+import time, os
 import tasks.task_1_main_code as solve_1
 import tasks.task_2_alt_code as solve_2
 import tasks.task_3_alt_code as solve_3
 
-import os
 import ast
 
 # Example usage
@@ -18,9 +17,8 @@ if __name__ == "__main__":
     try:
         with open(grid_file_path, 'r') as f:
             content = f.read()
-            # Extract the list part of the string 'grid = [...]'
-            grid_str = content[content.find('['):]
-            grid = ast.literal_eval(grid_str)
+            grid = ast.literal_eval(content)
+
     except FileNotFoundError:
         print(f"Error: Grid file not found at {grid_file_path}")
         exit()
